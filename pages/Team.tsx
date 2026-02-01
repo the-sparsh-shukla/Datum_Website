@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Linkedin, Github, Users, Search, X } from 'lucide-react';
-import { TEAM_MEMBERS } from '../constants';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { Linkedin, Github, Users, Search, X } from "lucide-react";
+import { TEAM_MEMBERS } from "../constants";
+import { motion } from "framer-motion";
 
 /* ===== Animations ===== */
 
@@ -20,16 +20,16 @@ const cardAnim = {
 
 const Team: React.FC = () => {
 
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('All');
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("All");
   const [selectedMember, setSelectedMember] = useState<any>(null);
 
-  const roles = ['All', 'Technical', 'Research', 'Community'];
+  const roles = ["All", "Technical", "Research", "Community"];
 
   const filteredMembers = TEAM_MEMBERS.filter((member) => {
     const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase());
     const matchesFilter =
-      filter === 'All' || member.role.toLowerCase().includes(filter.toLowerCase());
+      filter === "All" || member.role.toLowerCase().includes(filter.toLowerCase());
 
     return matchesSearch && matchesFilter;
   });
@@ -42,9 +42,9 @@ const Team: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
 
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full 
-          bg-indigo-100 dark:bg-indigo-500/10 
-          text-indigo-600 dark:text-indigo-400 
-          text-xs font-bold mb-4">
+            bg-indigo-100 dark:bg-indigo-500/10 
+            text-indigo-600 dark:text-indigo-400 
+            text-xs font-bold mb-4">
             <Users className="w-3 h-3" />
             Core Collective
           </div>
@@ -53,7 +53,7 @@ const Team: React.FC = () => {
             Meet The DATUM Team
           </h1>
 
-          <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base">
+          <p className="text-slate-600 dark:text-slate-300">
             Builders behind DATUM innovation.
           </p>
 
@@ -77,21 +77,19 @@ const Team: React.FC = () => {
 
           {/* Filters */}
           <div className="flex gap-2 flex-wrap justify-center">
-
             {roles.map(role => (
               <button
                 key={role}
                 onClick={() => setFilter(role)}
                 className={`px-4 py-2 rounded-full text-xs font-medium transition
                 ${filter === role
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300"
                 }`}
               >
                 {role}
               </button>
             ))}
-
           </div>
 
         </div>
@@ -114,30 +112,36 @@ const Team: React.FC = () => {
             <motion.div
               key={member.id}
               variants={cardAnim}
-              className="flip-card perspective cursor-pointer"
+              className="flip-card perspective gradient-border tilt cursor-pointer"
               onClick={(e) => {
 
-                // First tap = flip
-                if (!e.currentTarget.classList.contains("active")) {
-                  e.currentTarget.classList.add("active");
-                  return;
+                // Mobile tap flip logic
+                if (window.matchMedia("(hover: none)").matches) {
+
+                  // First tap -> flip
+                  if (!e.currentTarget.classList.contains("active")) {
+                    e.currentTarget.classList.add("active");
+                    return;
+                  }
+
+                  // Second tap -> open modal
+                  setSelectedMember(member);
                 }
 
-                // Second tap = open modal
-                setSelectedMember(member);
               }}
             >
 
               <div className="flip-inner relative h-[420px]">
 
-                {/* FRONT */}
+                {/* ================= FRONT ================= */}
                 <div className="flip-front absolute inset-0 
-                bg-white dark:bg-slate-800 
-                rounded-3xl shadow-lg p-5 
-                text-center flex flex-col items-center">
+                  bg-white dark:bg-slate-800 
+                  rounded-3xl shadow-lg p-5 
+                  text-center flex flex-col items-center">
 
                   <img
                     src={member.photoUrl}
+                    alt={member.name}
                     className="w-24 h-24 rounded-xl object-cover shadow mb-3"
                   />
 
@@ -154,23 +158,22 @@ const Team: React.FC = () => {
                   </p>
 
                   <span className="text-[11px] mt-auto text-slate-500">
-                    Tap to flip • Tap again for profile
+                    Hover to flip • Tap on mobile
                   </span>
 
                 </div>
 
-                {/* BACK */}
+                {/* ================= BACK ================= */}
                 <div className="flip-back absolute inset-0 
-                bg-indigo-600 dark:bg-indigo-500 
-                text-white rounded-3xl shadow-lg p-5 
-                flex flex-col justify-center text-center">
+                  bg-indigo-600 dark:bg-indigo-500 
+                  text-white rounded-3xl shadow-lg p-5 
+                  flex flex-col justify-center text-center">
 
                   <h3 className="font-bold mb-3 text-sm">
                     Skills
                   </h3>
 
                   <div className="flex flex-wrap justify-center gap-2">
-
                     {member.skills.map((skill: string, i: number) => (
                       <span
                         key={i}
@@ -179,7 +182,6 @@ const Team: React.FC = () => {
                         {skill}
                       </span>
                     ))}
-
                   </div>
 
                   {/* Social Buttons */}

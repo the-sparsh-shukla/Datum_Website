@@ -6,10 +6,18 @@
 
 .flip-inner {
   transform-style: preserve-3d;
-  transition: transform 0.8s ease;
+  transition: transform 0.6s cubic-bezier(.4, 0, .2, 1);
 }
 
-.flip-card:hover .flip-inner {
+/* Desktop Hover Flip */
+@media (hover: hover) {
+  .flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Mobile Tap Flip */
+.flip-card.active .flip-inner {
   transform: rotateY(180deg);
 }
 
@@ -56,6 +64,16 @@
   transition: transform 0.4s ease;
 }
 
-.tilt:hover {
-  transform: rotateX(6deg) rotateY(-6deg) scale(1.03);
+/* Desktop Tilt */
+@media (hover: hover) {
+  .tilt:hover {
+    transform: rotateX(6deg) rotateY(-6deg) scale(1.03);
+  }
+}
+
+/* Disable Tilt On Mobile */
+@media (hover: none) {
+  .tilt:hover {
+    transform: none;
+  }
 }

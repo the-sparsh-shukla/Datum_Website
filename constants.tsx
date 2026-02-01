@@ -27,7 +27,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: 'Om Lakshkar',
     role: 'Technical Head',
     photoUrl:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=400&auto=format&fit=crop',
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
     bio: 'Dedicated to building scalable systems and fostering technical excellence.',
@@ -36,9 +36,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: '2',
     name: 'Raj Mayank',
-    role: 'Technical Director',
+    role: 'Full Stack Developer',
     photoUrl:
-      'https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=400&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1601233749202-95d04d5b3c00?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
     bio: 'Expert in machine learning pipelines and mentoring students.',
@@ -47,9 +47,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: '3',
     name: 'Sparsh Shukla',
-    role: 'Head of Research',
+    role: 'AI Specialist',
     photoUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop',
+      'https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
     bio: 'Exploring deep learning and AI research.',
@@ -57,8 +57,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     id: '4',
-    name: 'Dev Kumar Jadaun',
-    role: 'Community Lead',
+    name: 'Dev Thakur',
+    role: 'Frontend Developer',
     photoUrl:
       'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop',
     linkedin: 'https://linkedin.com',
