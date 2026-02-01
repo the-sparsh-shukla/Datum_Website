@@ -11,15 +11,16 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Team', path: '/team' },
-    { name: 'Events', path: '/events' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Career Planner', path: '/career-planner' },
-    { name: 'Admin', path: '/admin' },
-  ];
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Team", path: "/team" },
+  { name: "Events", path: "/events" },
+  { name: "Career Planner", path: "/career-planner" },
+  { name: "Gallery", path: "/gallery" },
+  { name: "Admin", path: "/admin" }
+];
+
 
   const isActive = (path: string) => location.pathname === path;
 
