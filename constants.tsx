@@ -9,7 +9,7 @@ import {
 /* ================= TEAM INTERFACE ================= */
 
 export interface TeamMember {
-  id: string;
+  id: number; // ✅ Must be number to match Team.tsx
   name: string;
   role: string;
   photoUrl: string;
@@ -23,7 +23,7 @@ export interface TeamMember {
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: '1',
+    id: 1,
     name: 'Om Lakshkar',
     role: 'Technical Head',
     photoUrl:
@@ -34,29 +34,29 @@ export const TEAM_MEMBERS: TeamMember[] = [
     skills: ['React', 'System Design', 'Cloud', 'Leadership']
   },
   {
-    id: '2',
+    id: 2,
     name: 'Raj Mayank',
     role: 'Full Stack Developer',
     photoUrl:
-      'https://images.unsplash.com/photo-1601233749202-95d04d5b3c00?q=80&w=1438&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1601233749202-95d04d5b3c00?q=80&w=1438&auto=format&fit=crop',
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
     bio: 'Expert in machine learning pipelines and mentoring students.',
     skills: ['Machine Learning', 'Python', 'TensorFlow', 'Data Science']
   },
   {
-    id: '3',
+    id: 3,
     name: 'Sparsh Shukla',
     role: 'AI Specialist',
     photoUrl:
-      'https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=687&auto=format&fit=crop',
     linkedin: 'https://linkedin.com',
     github: 'https://github.com',
     bio: 'Exploring deep learning and AI research.',
     skills: ['Deep Learning', 'PyTorch', 'NLP', 'Research']
   },
   {
-    id: '4',
+    id: 4,
     name: 'Dev Thakur',
     role: 'Frontend Developer',
     photoUrl:

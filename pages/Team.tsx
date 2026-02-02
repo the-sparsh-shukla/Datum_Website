@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Linkedin, Github, Users, Search, X } from "lucide-react";
 import { TEAM_MEMBERS } from "../constants";
 import { motion } from "framer-motion";
 
-/* ===== Animations ===== */
+/* ================= TYPES ================= */
+
+interface Member {
+  id: number;
+  name: string;
+  role: string;
+  bio: string;
+  photoUrl: string;
+  skills: string[];
+  linkedin: string;
+  github: string;
+}
+
+/* ================= ANIMATIONS ================= */
 
 const container = {
   hidden: { opacity: 0 },
@@ -22,17 +35,38 @@ const Team: React.FC = () => {
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
-  const [selectedMember, setSelectedMember] = useState<any>(null);
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   const roles = ["All", "Technical", "Research", "Community"];
 
-  const filteredMembers = TEAM_MEMBERS.filter((member) => {
+  /* ================= FILTER LOGIC ================= */
+
+  const filteredMembers = TEAM_MEMBERS.filter((member: Member) => {
     const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase());
     const matchesFilter =
       filter === "All" || member.role.toLowerCase().includes(filter.toLowerCase());
 
     return matchesSearch && matchesFilter;
   });
+
+  /* ================= ESC KEY CLOSE ================= */
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelectedMember(null);
+      }
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
+  /* ================= BODY SCROLL LOCK ================= */
+
+  useEffect(() => {
+    document.body.style.overflow = selectedMember ? "hidden" : "auto";
+  }, [selectedMember]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
@@ -107,7 +141,7 @@ const Team: React.FC = () => {
           grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 
           gap-6 md:gap-10">
 
-          {filteredMembers.map(member => (
+          {filteredMembers.map((member: Member) => (
 
             <motion.div
               key={member.id}
@@ -174,7 +208,7 @@ const Team: React.FC = () => {
                   </h3>
 
                   <div className="flex flex-wrap justify-center gap-2">
-                    {member.skills.map((skill: string, i: number) => (
+                    {member.skills.map((skill, i) => (
                       <span
                         key={i}
                         className="bg-white/20 px-3 py-1 rounded-full text-[11px]"
