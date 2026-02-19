@@ -3,12 +3,13 @@ import React from 'react';
 import Hero from '../components/Hero';
 import AboutSummary from '../components/AboutSummary';
 import { FEATURES } from '../constants';
+import Reveal from "../components/Reveal";
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       <Hero />
-      
+      <Reveal>
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 dark:text-white">Why Join Datum?</h2>
@@ -31,7 +32,7 @@ const Home: React.FC = () => {
           ))}
         </div>
       </section>
-
+      </Reveal>
       <AboutSummary />
 
       <section className="py-24 bg-indigo-600 text-white overflow-hidden relative">

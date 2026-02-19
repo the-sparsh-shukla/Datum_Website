@@ -1,16 +1,19 @@
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import MagneticButton from "../components/MagneticButton";
+import { typography, gradients } from "../components/styles/designSystem";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  Sparkles, 
-  Users, 
-  GraduationCap, 
-  BrainCircuit, 
+import {
+  ArrowRight,
+  Users,
+  BrainCircuit,
   Database,
   Terminal,
-  MousePointer2
-} from 'lucide-react';
+  MousePointer2,
+} from "lucide-react";
+
+/* ================= PARTICLE NETWORK ================= */
 
 const ParticleNetwork = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,10 +21,17 @@ const ParticleNetwork = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let particles: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
+    let particles: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+    }[] = [];
+
     const particleCount = 80;
     const connectionDistance = 150;
 
@@ -45,8 +55,8 @@ const ParticleNetwork = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(79, 70, 229, 0.4)';
-      ctx.strokeStyle = 'rgba(79, 70, 229, 0.15)';
+      ctx.fillStyle = "rgba(79, 70, 229, 0.4)";
+      ctx.strokeStyle = "rgba(79, 70, 229, 0.15)";
 
       particles.forEach((p, i) => {
         p.x += p.vx;
@@ -75,93 +85,110 @@ const ParticleNetwork = () => {
       requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener("resize", resize);
     resize();
     createParticles();
     draw();
 
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40 dark:opacity-60 pointer-events-none" />;
-};
-
-const Hero: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-slate-950 px-4 transition-colors duration-500 pt-20">
-      {/* Network Effect */}
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+    />
+  );
+};
+
+/* ================= HERO ================= */
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const Hero: React.FC = () => {
+  return (
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20 bg-white dark:bg-slate-950">
+
       <ParticleNetwork />
-      
-      {/* Blue Glow Background */}
-      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-500/10 dark:bg-blue-600/20 blur-[150px] rounded-full animate-pulse"></div>
-      <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-indigo-500/10 dark:bg-indigo-600/20 blur-[150px] rounded-full animate-pulse delay-700"></div>
 
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-grid opacity-[0.05] dark:opacity-10 text-slate-900 dark:text-white pointer-events-none"></div>
+      {/* Royal Glow */}
+      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#4f46e5]/20 blur-[160px] rounded-full animate-pulse"></div>
+      <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#6366f1]/20 blur-[160px] rounded-full animate-pulse delay-700"></div>
 
-      <div className={`relative z-10 max-w-7xl mx-auto text-center transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-        
-        {/* Floating AI Indicators */}
-        <div className="flex justify-center mb-6">
-           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50/80 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 text-blue-600 dark:text-blue-400 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md animate-bounce">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 max-w-7xl mx-auto text-center"
+      >
+        {/* Badge */}
+        <motion.div variants={itemVariants} className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4f46e5]/10 border border-[#4f46e5]/30 text-[#4f46e5] text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md">
             <BrainCircuit className="w-3.5 h-3.5" />
             <span>Neural Network Active</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Main Heading */}
-        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black tracking-tighter mb-8 leading-[0.8] text-slate-900 dark:text-white">
+        {/* Heading */}
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[0.9] text-slate-900 dark:text-white"
+        >
           THE <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 drop-shadow-[0_0_50px_rgba(37,99,235,0.2)]">
+          <span className="bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#a78bfa] bg-clip-text text-transparent drop-shadow-[0_0_60px_rgba(79,70,229,0.6)]">
             AI GENERATION
           </span>
-        </h1>
-        
-        {/* Description Text */}
-        <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed mb-12 px-4">
-          Datum is a student-powered lab where data science theory meets <span className="text-indigo-600 dark:text-indigo-400 font-bold underline decoration-indigo-500/30 underline-offset-4">real-world impact</span>. Join 500+ peers in building the future.
-        </p>
+        </motion.h1>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
-          <button className="group relative px-10 py-5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-lg rounded-2xl transition-all shadow-2xl shadow-indigo-600/40 active:scale-95 overflow-hidden w-full sm:w-auto">
-            <div className="relative z-10 flex items-center justify-center gap-2">
-              JOIN DATUM
-              <MousePointer2 className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-          </button>
+        {/* Description */}
+        <motion.p
+          variants={itemVariants}
+          className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed mb-12"
+        >
+          Datum is a student-powered lab where data science theory meets real-world impact. Join 500+ peers building the future.
+        </motion.p>
+
+        {/* Buttons */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
           
-          <Link 
-            to="/events" 
-            className="px-10 py-5 bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-black text-lg rounded-2xl border border-slate-200 dark:border-slate-800 transition-all backdrop-blur-xl active:scale-95 shadow-lg w-full sm:w-auto flex items-center justify-center gap-2 group"
+          <MagneticButton>
+            <button className="group px-8 py-4 rounded-2xl bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold text-lg hover:shadow-[0_0_40px_rgba(79,70,229,0.6)] transition-all duration-300 active:scale-95 flex items-center gap-2">
+              JOIN DATUM
+              <MousePointer2 className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </button>
+          </MagneticButton>
+
+          <Link
+            to="/events"
+            className="px-8 py-4 bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-xl border border-slate-200 dark:border-slate-800 transition-all active:scale-95 shadow-md flex items-center gap-2"
           >
             EXPLORE PROJECTS
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
           </Link>
-        </div>
+        </motion.div>
 
-        {/* Stats Row */}
-        <div className="flex flex-wrap justify-center gap-10 md:gap-20 border-t border-slate-100 dark:border-slate-800/50 pt-12">
+        {/* Stats */}
+        <motion.div className="flex flex-wrap justify-center gap-10 md:gap-20 border-t border-slate-100 dark:border-slate-800/50 pt-12">
           {[
-            { label: 'ACTIVE MEMBERS', val: '500+', icon: Users },
-            { label: 'PROJECTS BUILT', val: '120+', icon: Terminal },
-            { label: 'WORKSHOPS', val: '45+', icon: Database }
+            { label: "ACTIVE MEMBERS", val: "500+", icon: Users },
+            { label: "PROJECTS BUILT", val: "120+", icon: Terminal },
+            { label: "WORKSHOPS", val: "45+", icon: Database },
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center">
-              <stat.icon className="w-5 h-5 text-indigo-500 mb-2 opacity-50" />
-              <span className="text-3xl font-black text-slate-900 dark:text-white mb-1">{stat.val}</span>
-              <span className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">{stat.label}</span>
+              <stat.icon className="w-5 h-5 text-[#4f46e5] mb-2 opacity-60" />
+              <span className="text-3xl font-black text-slate-900 dark:text-white mb-1">
+                {stat.val}
+              </span>
+              <span className="text-xs font-bold text-slate-400 tracking-widest uppercase">
+                {stat.label}
+              </span>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
