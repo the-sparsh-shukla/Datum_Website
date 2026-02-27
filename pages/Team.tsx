@@ -4,16 +4,15 @@ import { TEAM_MEMBERS } from "../constants";
 import Reveal from "../components/Reveal";
 
 const Team: React.FC = () => {
-  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const toggleCard = (id: string) => {
-    setActiveCard(prev => (prev === id ? null : id));
+  const toggleCard = (id: number) => {
+    setActiveCard((prev) => (prev === id ? null : id));
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
 
-      {/* ================= HEADER ================= */}
       <Reveal>
         <section className="py-24 text-center border-b border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4">
@@ -38,12 +37,11 @@ const Team: React.FC = () => {
         </section>
       </Reveal>
 
-      {/* ================= TEAM GRID ================= */}
       <Reveal>
         <section className="py-20 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-            {TEAM_MEMBERS.map(member => (
+            {TEAM_MEMBERS.map((member) => (
 
               <div
                 key={member.id}
@@ -54,7 +52,6 @@ const Team: React.FC = () => {
               >
                 <div className="flip-inner relative h-[420px]">
 
-                  {/* FRONT */}
                   <div className="flip-front absolute inset-0 bg-white dark:bg-slate-800 
                   rounded-3xl shadow-lg p-6 flex flex-col items-center text-center">
 
@@ -82,7 +79,6 @@ const Team: React.FC = () => {
 
                   </div>
 
-                  {/* BACK */}
                   <div className="flip-back absolute inset-0 bg-indigo-600 
                   text-white rounded-3xl shadow-lg p-6 flex flex-col justify-center text-center">
 
