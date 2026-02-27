@@ -1,138 +1,115 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import NotificationBell from './NotificationBell';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import NotificationBell from "./NotificationBell";
 
 interface HeaderProps {
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   onToggleTheme: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Team', path: '/team' },
-    { name: 'Events', path: '/events' },
-    { name: 'Career Planner', path: '/career-planner' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Admin', path: '/admin' },
+    { name: "Home", path: "/", section: "hero" },
+    { name: "About", path: "/about", section: "about" },
+    { name: "Team", path: "/team", section: "team" },
+    { name: "Events", path: "/events", section: "events" },
+    { name: "Career Planner", path: "/career-planner", section: "planner" },
+    { name: "Gallery", path: "/gallery", section: "gallery" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      const sections = document.querySelectorAll("section[id]");
+      let current = "";
+
+      sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop <= 150) {
+          current = section.getAttribute("id") || "";
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isActiveRoute = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl rounded-2xl transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-lg border border-slate-200 dark:border-slate-800"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="px-6">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 overflow-hidden rounded-xl bg-white p-1.5 shadow-lg shadow-indigo-500/10 group-hover:rotate-12 transition-transform duration-500 ring-1 ring-slate-100">
-              <img
-                src="logo_datum.png"
-                alt="Datum Logo"
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src =
-                    'https://raw.githubusercontent.com/stackblitz/stackblitz-images/main/datum-logo.png';
-                }}
-              />
-            </div>
-            <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
+
+          <Link to="/" className="flex items-center gap-3">
+            <span className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
               DATUM
             </span>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-bold tracking-wide transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${
-                  isActive(link.path)
-                    ? 'text-indigo-600 dark:text-indigo-400'
-                    : 'text-slate-500 dark:text-slate-400'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
 
-            {/* 🔔 Notification Bell */}
+            {navLinks.map((link) => {
+              const active =
+                isActiveRoute(link.path) || activeSection === link.section;
+
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative text-sm font-bold transition-colors ${
+                    active
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-slate-500 dark:text-slate-400 hover:text-indigo-600"
+                  }`}
+                >
+                  {link.name}
+                  {active && (
+                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-indigo-600 rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
+
             <NotificationBell />
 
-            {/* Theme Toggle */}
             <button
               onClick={onToggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all border border-slate-200 dark:border-slate-800"
-              aria-label="Toggle Theme"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900"
             >
-              {theme === 'light' ? (
+              {theme === "light" ? (
                 <Moon className="w-5 h-5" />
               ) : (
                 <Sun className="w-5 h-5" />
               )}
             </button>
 
-            {/* CTA */}
-            <Link
-              to="/career-planner"
-              className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-black rounded-xl transition-all shadow-lg shadow-indigo-500/20 active:scale-95"
-            >
-              GET STARTED
-            </Link>
           </nav>
 
-          {/* Mobile Buttons */}
           <div className="md:hidden flex items-center gap-2">
-            <NotificationBell />
-
-            <button
-              onClick={onToggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all"
-            >
-              {theme === 'light' ? (
-                <Moon className="w-6 h-6" />
-              ) : (
-                <Sun className="w-6 h-6" />
-              )}
-            </button>
-
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-2"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X /> : <Menu />}
             </button>
           </div>
+
         </div>
       </div>
-
-      {/* Mobile Nav */}
-      {isOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 animate-in slide-in-from-top-4">
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-3 py-4 text-base font-bold rounded-md ${
-                  isActive(link.path)
-                    ? 'text-indigo-600 dark:text-indigo-400 bg-slate-50 dark:bg-slate-800'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </header>
   );
 };
