@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import {
   HashRouter as Router,
   Routes,
@@ -6,6 +7,10 @@ import {
   useLocation
 } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+=======
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from "framer-motion";
+>>>>>>> 74af6f8d92de15326b18b5f1d72a01c7588a0358
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -18,8 +23,13 @@ import Events from './pages/Events';
 import Team from './pages/Team';
 import Gallery from './components/Gallery';
 import Admin from './components/Admin';
-import AddEvent from './components/AddEvent';
 import CareerPlanner from "./pages/CareerPlanner";
+<<<<<<< HEAD
+=======
+import GlobalBackground from "./components/GlobalBackground";
+import PageTransition from "./components/PageTransition";
+import ParticleBackground from "./components/ParticleBackground";
+>>>>>>> 74af6f8d92de15326b18b5f1d72a01c7588a0358
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -83,10 +93,30 @@ const App: React.FC = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
+  function AnimatedRoutes() {
+    const location = useLocation();
+
+    return (
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/team" element={<PageTransition><Team /></PageTransition>} />
+          <Route path="/events" element={<PageTransition><Events /></PageTransition>} />
+          <Route path="/career-planner" element={<PageTransition><CareerPlanner /></PageTransition>} />
+          <Route path="/gallery" element={<PageTransition><Gallery /></PageTransition>} />
+          <Route path="/admin" element={<PageTransition><Admin /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
+    );
+  }
+
   return (
     <Router>
+      <GlobalBackground />
       <ScrollToTop />
 
+<<<<<<< HEAD
       <div className="flex flex-col min-h-screen transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-200">
 
         <ScrollProgress />
@@ -94,6 +124,14 @@ const App: React.FC = () => {
         <Header theme={theme} onToggleTheme={toggleTheme} />
 
         <AnimatedRoutes />
+=======
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header theme={theme} onToggleTheme={toggleTheme} />
+
+        <main className="flex-grow">
+          <AnimatedRoutes />
+        </main>
+>>>>>>> 74af6f8d92de15326b18b5f1d72a01c7588a0358
 
         <Footer />
         <ChatWidget />
