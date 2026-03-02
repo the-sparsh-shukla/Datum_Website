@@ -2,18 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import MagneticButton from "../components/MagneticButton";
-import { typography, gradients } from "../components/styles/designSystem";
-
-import {
-  ArrowRight,
-  Users,
-  BrainCircuit,
-  Database,
-  Terminal,
-  MousePointer2,
-} from "lucide-react";
-
-/* ================= PARTICLE NETWORK ================= */
+import { ArrowRight, BrainCircuit, MousePointer2 } from "lucide-react";
 
 const ParticleNetwork = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -55,8 +44,8 @@ const ParticleNetwork = () => {
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(79, 70, 229, 0.4)";
-      ctx.strokeStyle = "rgba(79, 70, 229, 0.15)";
+      ctx.fillStyle = "rgba(79,70,229,0.4)";
+      ctx.strokeStyle = "rgba(79,70,229,0.15)";
 
       particles.forEach((p, i) => {
         p.x += p.vx;
@@ -101,8 +90,6 @@ const ParticleNetwork = () => {
   );
 };
 
-/* ================= HERO ================= */
-
 const itemVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
@@ -110,23 +97,27 @@ const itemVariants = {
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20 bg-white dark:bg-slate-950">
-
+    <section className="relative h-screen flex items-center justify-center overflow-hidden px-4 bg-white dark:bg-slate-950">
       <ParticleNetwork />
 
-      {/* Royal Glow */}
-      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#4f46e5]/20 blur-[160px] rounded-full animate-pulse"></div>
-      <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#6366f1]/20 blur-[160px] rounded-full animate-pulse delay-700"></div>
+      {/* Glow Effects */}
+      <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-indigo-600/20 blur-[160px] rounded-full animate-pulse"></div>
+      <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-indigo-500/20 blur-[160px] rounded-full animate-pulse delay-700"></div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: { transition: { staggerChildren: 0.2 } },
+        }}
         className="relative z-10 max-w-7xl mx-auto text-center"
       >
         {/* Badge */}
-        <motion.div variants={itemVariants} className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4f46e5]/10 border border-[#4f46e5]/30 text-[#4f46e5] text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md">
+        <motion.div
+          variants={itemVariants}
+          className="flex justify-center mb-6"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600/10 border border-indigo-600/30 text-indigo-600 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-md">
             <BrainCircuit className="w-3.5 h-3.5" />
             <span>Neural Network Active</span>
           </div>
@@ -138,7 +129,7 @@ const Hero: React.FC = () => {
           className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[0.9] text-slate-900 dark:text-white"
         >
           THE <br />
-          <span className="bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#a78bfa] bg-clip-text text-transparent drop-shadow-[0_0_60px_rgba(79,70,229,0.6)]">
+          <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_60px_rgba(79,70,229,0.6)]">
             AI GENERATION
           </span>
         </motion.h1>
@@ -148,14 +139,17 @@ const Hero: React.FC = () => {
           variants={itemVariants}
           className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto font-medium leading-relaxed mb-12"
         >
-          Datum is a student-powered lab where data science theory meets real-world impact. Join 500+ peers building the future.
+          Datum is a student-powered lab where data science theory meets real-world impact.
+          Join 500+ peers building the future.
         </motion.p>
 
         {/* Buttons */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
-          
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
           <MagneticButton>
-            <button className="group px-8 py-4 rounded-2xl bg-[#4f46e5] hover:bg-[#4338ca] text-white font-bold text-lg hover:shadow-[0_0_40px_rgba(79,70,229,0.6)] transition-all duration-300 active:scale-95 flex items-center gap-2">
+            <button className="group px-10 py-5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg transition-all duration-300 active:scale-95 flex items-center gap-2">
               JOIN DATUM
               <MousePointer2 className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
             </button>
@@ -163,33 +157,14 @@ const Hero: React.FC = () => {
 
           <Link
             to="/events"
-            className="px-8 py-4 bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-xl border border-slate-200 dark:border-slate-800 transition-all active:scale-95 shadow-md flex items-center gap-2"
+            className="px-10 py-5 bg-transparent hover:bg-slate-800/40 text-white font-bold text-lg rounded-2xl border border-slate-700 transition-all active:scale-95 flex items-center gap-2"
           >
             EXPLORE PROJECTS
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>
-
-        {/* Stats */}
-        <motion.div className="flex flex-wrap justify-center gap-10 md:gap-20 border-t border-slate-100 dark:border-slate-800/50 pt-12">
-          {[
-            { label: "ACTIVE MEMBERS", val: "500+", icon: Users },
-            { label: "PROJECTS BUILT", val: "120+", icon: Terminal },
-            { label: "WORKSHOPS", val: "45+", icon: Database },
-          ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <stat.icon className="w-5 h-5 text-[#4f46e5] mb-2 opacity-60" />
-              <span className="text-3xl font-black text-slate-900 dark:text-white mb-1">
-                {stat.val}
-              </span>
-              <span className="text-xs font-bold text-slate-400 tracking-widest uppercase">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
       </motion.div>
-    </div>
+    </section>
   );
 };
 

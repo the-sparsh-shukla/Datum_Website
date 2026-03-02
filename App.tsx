@@ -34,6 +34,7 @@ const ScrollToTop = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   return (
     <AnimatePresence mode="wait">
@@ -42,8 +43,8 @@ const AnimatedRoutes = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="flex-grow pt-36"
+        transition={{ duration: 0.4 }}
+        className={`flex-grow ${!isHome ? "pt-16" : ""}`}
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -71,11 +72,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
+    if (theme === "dark") root.classList.add("dark");
+    else root.classList.remove("dark");
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -88,17 +87,12 @@ const App: React.FC = () => {
       <GlobalBackground />
       <ScrollToTop />
 
-      <div className="relative z-10 flex flex-col min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-200 transition-colors duration-300">
-        
+      <div className="relative flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
         <ScrollProgress />
-
         <Header theme={theme} onToggleTheme={toggleTheme} />
-
         <AnimatedRoutes />
-
         <Footer />
         <ChatWidget />
-
       </div>
     </Router>
   );
