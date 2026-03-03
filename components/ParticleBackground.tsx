@@ -71,7 +71,7 @@ const ParticlesBackground = () => {
     detectRetina: true,
   }), []);
 
-  return <Particles id="tsparticles" options={options} />;
+  return <Particles id="tsparticles" options={options as any} />;
 };
 
 export default ParticlesBackground;

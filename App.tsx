@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import ChatWidget from "./components/ChatWidget";
 import ScrollProgress from "./components/ScrollProgress";
 import GlobalBackground from "./components/GlobalBackground";
+import PageTransition from "./components/PageTransition";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -38,25 +39,55 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4 }}
-        className={`flex-grow ${!isHome ? "pt-16" : ""}`}
-      >
-        <Routes location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/career-planner" element={<CareerPlanner />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/add-event" element={<AddEvent />} />
-        </Routes>
-      </motion.div>
+        <Routes location={location} key={location.pathname}>
+        <Route path="/" element={
+          <PageTransition>
+            <Home />
+          </PageTransition>
+        } />
+
+        <Route path="/about" element={
+          <PageTransition>
+            <About />
+          </PageTransition>
+        } />
+
+        <Route path="/team" element={
+          <PageTransition>
+            <Team />
+          </PageTransition>
+        } />
+
+        <Route path="/events" element={
+          <PageTransition>
+            <Events />
+          </PageTransition>
+        } />
+
+        <Route path="/gallery" element={
+          <PageTransition>
+            <Gallery />
+          </PageTransition>
+        } />
+
+        <Route path="/career-planner" element={
+          <PageTransition>
+            <CareerPlanner />
+          </PageTransition>
+        } />
+
+        <Route path="/admin" element={
+          <PageTransition>
+            <Admin />
+          </PageTransition>
+        } />
+
+        <Route path="/admin/add-event" element={
+          <PageTransition>
+            <AddEvent />
+          </PageTransition>
+        } />
+      </Routes>
     </AnimatePresence>
   );
 };

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { motion } from "framer-motion";
 import NotificationBell from "./NotificationBell";
 
 interface HeaderProps {
@@ -10,7 +11,21 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (e.clientY <= 80) {
+        setShowHeader(true);
+      } else {
+        setShowHeader(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -22,49 +37,45 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full h-16 z-50 bg-transparent">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: showHeader ? 0 : -100 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="fixed top-0 left-0 w-full h-16 z-[100] backdrop-blur-md bg-white/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-800"
+    >
       <div className="max-w-7xl mx-auto px-6 h-full">
         <div className="flex items-center justify-between h-full">
 
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className="text-2xl font-black bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
+          {/* LOGO (Image + Text) */}
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src="/logo_datum.png"
+              alt="DATUM Logo"
+              className="h-8 w-auto"
+            />
+            <span className="text-xl font-black bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
               DATUM
             </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => {
               const active = location.pathname === link.path;
-
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative text-sm font-bold transition-all duration-300 ${
+                  className={`text-sm font-bold transition-all duration-300 ${
                     active
                       ? "text-indigo-600"
-                      : "text-slate-400 hover:text-indigo-600"
+                      : "text-slate-600 dark:text-slate-400 hover:text-indigo-600"
                   }`}
                 >
                   {link.name}
-                  {active && (
-                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-indigo-600 rounded-full" />
-                  )}
                 </Link>
               );
             })}
-
-            {/* ✅ Admin Button */}
-            <Link
-              to="/admin"
-              className="px-5 py-2 rounded-xl text-sm font-bold text-white 
-                         bg-gradient-to-r from-indigo-600 to-purple-600 
-                         hover:opacity-90 transition-all duration-300"
-            >
-              Admin
-            </Link>
 
             <NotificationBell />
 
@@ -84,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-white"
+              className="p-2 text-slate-700 dark:text-white"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -95,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-slate-950">
+        <div className="md:hidden bg-slate-950 border-t border-slate-800">
           <div className="px-6 py-4 space-y-2">
             {navLinks.map((link) => (
               <Link
@@ -107,21 +118,11 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme }) => {
                 {link.name}
               </Link>
             ))}
-
-            {/* ✅ Admin in Mobile */}
-            <Link
-              to="/admin"
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-3 text-base font-bold text-white 
-                         bg-gradient-to-r from-indigo-600 to-purple-600 
-                         rounded-lg"
-            >
-              Admin
-            </Link>
           </div>
         </div>
       )}
-    </header>
+
+    </motion.header>
   );
 };
 
