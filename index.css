@@ -1,0 +1,168 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #6366f1;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6366f1, #3b82f6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#4f46e5, #2563eb);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(#818cf8, #60a5fa);
+}
+
+/* ===== Vertical Rhythm System ===== */
+
+section {
+  scroll-margin-top: 140px;
+  position: relative;
+}
+
+.section-padding {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.section-padding-lg {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+
+.section-light {
+  background: white;
+}
+
+.dark .section-light {
+  background: #020617;
+}
+
+.section-alt {
+  background: #f8fafc;
+}
+
+.dark .section-alt {
+  background: #0f172a;
+}
+
+/* ===== Animation System ===== */
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 3D + Effects ===== */
+
+.perspective {
+  perspective: 1200px;
+}
+
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(.4, 0, .2, 1);
+}
+
+@media (hover: hover) {
+  .flip-card:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-card.active .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(45deg, #6366f1, #3b82f6, #22c55e);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+.gradient-border > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tilt {
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+@media (hover: hover) {
+  .tilt:hover {
+    transform: rotateX(6deg) rotateY(-6deg) scale(1.03);
+  }
+}
+
+@media (hover: none) {
+  .tilt:hover {
+    transform: none;
+  }
+<<<<<<< HEAD
+}
+=======
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  animation: gradientMove 6s ease infinite;
+}
+>>>>>>> 74af6f8d92de15326b18b5f1d72a01c7588a0358
