@@ -112,26 +112,98 @@ export const FEATURES = [
 
 /* ================= PAST EVENTS ================= */
 
-export const PAST_EVENTS: Event[] = [
+export const PAST_EVENTS: Event[]  = [
   {
     id: 'p1',
-    title: 'Deep Learning Sprint 2024',
-    date: 'Feb 05, 2025',
-    category: 'Project',
-    description: '48-hour ML challenge for medical image classification.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=400&auto=format&fit=crop'
+    title:"AI Battle Arena",
+    category:"Competition",
+    date:"Jan 30–31, 2026",
+    imageUrl:"https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    description:"High-intensity AI competition where teams built powerful AI solutions evaluated automatically."
   },
+
   {
     id: 'p2',
-    title: 'Resume Building Workshop',
-    date: 'Jan 10, 2025',
-    category: 'Workshop',
-    description: 'Hands-on resume and portfolio building session.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=400&auto=format&fit=crop'
+    title:"Own Your Identity in Web3",
+    category:"Workshop",
+    date:"Nov 11, 2025",
+    imageUrl:"https://images.unsplash.com/photo-1639322537228-f710d846310a",
+    description:"Workshop on digital identity, Web3 ecosystem and decentralized technologies."
+  },
+
+  {
+    id: 'p3',
+    title:"Devi@thon 2025 National Hackathon",
+    category:"Competition",
+    date:"Oct 9–11, 2025",
+    imageUrl:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+    description:"National hackathon where students solved real-world problems with ₹5L+ prize pool."
+  },
+
+  {
+    id: 'p4',
+    title:"W3M AI Meetup",
+    category:"Networking",
+    date:"Sept 15, 2025",
+    imageUrl:"https://images.unsplash.com/photo-1556761175-4b46a572b786",
+    description:"AI tools, Web3 discussions, internship insights and project mentorship."
+  },
+
+  {
+    id: 'p5',
+    title:"Smart India Hackathon Internal",
+    category:"Competition",
+    date:"Aug 29–31, 2025",
+    imageUrl:"https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+    description:"Students ideated and built solutions for national scale problems."
+  },
+
+  {
+    id: 'p6',
+    title:"Hack & Viz 2.0 – 30 Hour Hackathon",
+    category:"Competition",
+    date:"Apr 19–20, 2025",
+    imageUrl:"https://images.unsplash.com/photo-1518779578993-ec3579fee39f",
+    description:"30 hour coding marathon where teams built innovative products."
+  },
+
+  {
+    id: 'p7',
+    title:"Crack the Code – Placement Experience",
+    category:"Workshop",
+    date:"Nov 22, 2024",
+    imageUrl:"https://images.unsplash.com/photo-1581093588401-22d0a1a3e8d5",
+    description:"Placement simulation including mock tests and technical interviews."
+  },
+
+  {
+    id: 'p8',
+    title:"GenAI + IoT Workshop",
+    category:"Workshop",
+    date:"Oct 19, 2024",
+    imageUrl:"https://images.unsplash.com/photo-1555255707-c07966088b7b",
+    description:"Hands-on workshop integrating Generative AI with IoT systems."
+  },
+
+  {
+    id: 'p9',
+    title:"Project-X Face Recognition Workshop",
+    category:"Workshop",
+    date:"Apr 21, 2023",
+    imageUrl:"https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+    description:"Students built a real-time face recognition system using machine learning."
+  },
+
+  {
+    id: 'p10',
+    title:"CNN Deep Learning Workshop",
+    category:"Workshop",
+    date:"Feb 26, 2022",
+    imageUrl:"https://images.unsplash.com/photo-1518770660439-4636190af475",
+    description:"Workshop focused on Convolutional Neural Networks and computer vision."
   }
-];
+
+]
 
 /* ================= UPCOMING EVENTS ================= */
 
