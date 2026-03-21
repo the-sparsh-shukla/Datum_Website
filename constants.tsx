@@ -8,66 +8,311 @@ import {
 
 /* ================= TEAM INTERFACE ================= */
 
-export interface TeamMember {
-  id: number; // ✅ Must be number to match Team.tsx
+// constants.ts — DATUM Team Members grouped by team
+
+export type TeamMember = {
+  id: number;
   name: string;
   role: string;
-  photoUrl: string;
-  linkedin: string;
-  github: string;
+  team: string;
+  isHead: boolean; // true = Head / Co-Head
   bio: string;
   skills: string[];
-}
+  photoUrl: string;
+  github: string;
+  linkedin: string;
+  year: string;
+};
 
-/* ================= TEAM MEMBERS ================= */
+export const TEAMS = [
+  "Tech Team",
+  "Event Management",
+  "Media and Video Editing",
+  "Design Team",
+  "PR Team",
+] as const;
 
 export const TEAM_MEMBERS: TeamMember[] = [
+  // ─────────────────────────────────────────
+  //  TECH TEAM
+  // ─────────────────────────────────────────
   {
     id: 1,
-    name: 'Om Lakshkar',
-    role: 'Technical Head',
-    photoUrl:
-      'https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=400&auto=format&fit=crop',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    bio: 'Dedicated to building scalable systems and fostering technical excellence.',
-    skills: ['React', 'System Design', 'Cloud', 'Leadership']
+    name: "Harsh Chaudhary",
+    role: "Co-Head, Tech Team",
+    team: "Tech Team",
+    isHead: true,
+    bio: "AIML student and full-stack developer passionate about building scalable web applications and intelligent systems. Always exploring backend architecture, AI solutions, and impactful tech innovation.",
+    skills: ["Web Development", "Backend Development", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=1ETFuZ8x-lPbU502AcrsquCtu_2SwURaw",
+    github: "https://github.com/HARSHCHAUDHARY04",
+    linkedin: "https://www.linkedin.com/in/harsh-chaudhary-0aa420",
+    year: "2nd",
   },
   {
     id: 2,
-    name: 'Raj Mayank',
-    role: 'Full Stack Developer',
-    photoUrl:
-      'https://images.unsplash.com/photo-1601233749202-95d04d5b3c00?q=80&w=1438&auto=format&fit=crop',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    bio: 'Expert in machine learning pipelines and mentoring students.',
-    skills: ['Machine Learning', 'Python', 'TensorFlow', 'Data Science']
+    name: "Tech Head",            
+    role: "Head, Tech Team",
+    team: "Tech Team",
+    isHead: true,
+    bio: "Leading the Tech Team at DATUM — building innovative solutions and mentoring the next generation of developers.",
+    skills: ["Web Development", "Leadership", "System Design"],
+    photoUrl: "https://ui-avatars.com/api/?name=Tech+Head&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+    year: "3rd",
   },
   {
     id: 3,
-    name: 'Sparsh Shukla',
-    role: 'AI Specialist',
-    photoUrl:
-      'https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=687&auto=format&fit=crop',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    bio: 'Exploring deep learning and AI research.',
-    skills: ['Deep Learning', 'PyTorch', 'NLP', 'Research']
+    name: "Krishna Upadhyay",
+    role: "Tech Team Member",
+    team: "Tech Team",
+    isHead: false,
+    bio: "Frontend developer and UI/UX enthusiast who loves turning static design mockups into fully responsive, interactive sites that look great and work smoothly.",
+    skills: ["Frontend Development", "UI/UX Design"],
+    photoUrl: "https://drive.google.com/uc?id=1GMXLhrS3kLF-60HVmEZ-DUY1au1vJou3",
+    github: "https://github.com/k98-lang",
+    linkedin: "https://www.linkedin.com/in/krishna-upadhyay-829113",
+    year: "1st",
   },
   {
     id: 4,
-    name: 'Dev Thakur',
-    role: 'Frontend Developer',
-    photoUrl:
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop',
-    linkedin: 'https://linkedin.com',
-    github: 'https://github.com',
-    bio: 'Connecting students with industry leaders.',
-    skills: ['Communication', 'Event Management', 'Public Speaking', 'Networking']
-  }
-];
+    name: "Kritika Kanchan",
+    role: "Tech Team Member",
+    team: "Tech Team",
+    isHead: false,
+    bio: "Aspiring full-stack developer with a passion for AI-powered solutions. Driven by learning, innovation, and making technology meaningful.",
+    skills: ["Web Development", "Backend Development", "Frontend Development"],
+    photoUrl: "https://drive.google.com/uc?id=1MD3Ze8hZyyOlUKHzVkfMzFDDTuNxZp7O",
+    github: "https://github.com/Kritika-Kanchan-dev",
+    linkedin: "https://www.linkedin.com/in/kritika-kanchan",
+    year: "2nd",
+  },
+  {
+    id: 5,
+    name: "Priya Shukla",
+    role: "Tech Team Member",
+    team: "Tech Team",
+    isHead: false,
+    bio: "Tech-driven learner focused on building scalable web applications using Python, Flask, and MySQL. Strong in logic building, backend development, and turning ideas into clean, functional solutions.",
+    skills: ["Web Development", "Backend Development", "UI/UX Design", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=1kohQoXjI9ahctPsVU7bWRGXtjtGf8OPC",
+    github: "https://github.com/PriyaShukla3694",
+    linkedin: "https://www.linkedin.com/in/priya-shukla-37b79333a",
+    year: "2nd",
+  },
 
+  // ─────────────────────────────────────────
+  //  EVENT MANAGEMENT
+  // ─────────────────────────────────────────
+  {
+    id: 6,
+    name: "Keshav Jha",
+    role: "Co-Head, Event Team",
+    team: "Event Management",
+    isHead: true,
+    bio: "Event Team Co-Head at DATUM. Skilled in web development, video editing, and content writing — bringing creativity and energy to every event.",
+    skills: ["Web Development", "Video Editing", "Content Writing"],
+    photoUrl: "https://drive.google.com/uc?id=128hIvcJpTfEJ6MpES0FE00zPwBYF5Skx",
+    github: "https://github.com/keshav979",
+    linkedin: "https://www.linkedin.com/in/keshav-jha-8203a234b",
+    year: "2nd",
+  },
+  {
+    id: 7,
+    name: "Kritika Saxena",
+    role: "Co-Head, Event Team",
+    team: "Event Management",
+    isHead: true,
+    bio: "Enthusiastic AI student with a strong interest in public speaking and web development. Believes in teamwork, leadership, and continuous learning.",
+    skills: ["Frontend Development", "Public Speaking", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=10c3yQIayoI0FxCMFydoJ5x2pZbXK1R4B",
+    github: "https://github.com/kritika-26",
+    linkedin: "https://www.linkedin.com/in/kritika-saxena-509335335",
+    year: "2nd",
+  },
+  {
+    id: 8,
+    name: "Ronit Goswami",
+    role: "Event Team Member",
+    team: "Event Management",
+    isHead: false,
+    bio: "Building the web. Solving with logic. Growing every day. Full-Stack Developer focused on clean architecture and problem solving.",
+    skills: ["Web Development", "Backend Development", "Frontend Development", "Content Writing"],
+    photoUrl: "https://drive.google.com/uc?id=1hFeXg3sXN6FVS-uGCSksJCOEmeuOHObW",
+    github: "https://github.com/ronit-a11y",
+    linkedin: "https://www.linkedin.com/in/ronit-goswami-ba764432",
+    year: "2nd",
+  },
+  {
+    id: 9,
+    name: "Pradyumn Rana",
+    role: "Event Team Member",
+    team: "Event Management",
+    isHead: false,
+    bio: "Driven CS (AI & ML) student passionate about building impactful, real-world tech solutions. Focused on data, innovation, and continuous growth.",
+    skills: ["Frontend Development", "UI/UX Design", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=16wpEz1yzMdU1lj_2DYDdnijfErgKFv0h",
+    github: "https://github.com/pradyumn2304",
+    linkedin: "https://www.linkedin.com/in/pradyumn-rana-81b886383",
+    year: "1st",
+  },
+  {
+    id: 10,
+    name: "Suhani Saxena",
+    role: "Event Team Member",
+    team: "Event Management",
+    isHead: false,
+    bio: "BCA (Data Science) student passionate about technology and innovation. Focused on developing strong analytical and problem-solving skills.",
+    skills: ["Frontend Development", "Graphic Design"],
+    photoUrl: "https://drive.google.com/uc?id=1ctRfwAi-Z0iEmqdmm0tsmc9p5cFP2kg6",
+    github: "https://github.com/saxenasuhani1709-ks",
+    linkedin: "https://www.linkedin.com/in/suhani-saxena-291086384",
+    year: "1st",
+  },
+  {
+    id: 11,
+    name: "Mradul Khandelwal",
+    role: "Event Team Member",
+    team: "Event Management",
+    isHead: false,
+    bio: "Building my path, one smart move at a time. Dream big. Work smart. Stay real.",
+    skills: ["Backend Development", "Frontend Development", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=1lkdksBdwln_KW2lZxW3YWSkikmz55CvU",
+    github: "https://github.com/MK-2822/",
+    linkedin: "https://www.linkedin.com/in/mradul-khandelwal05/",
+    year: "2nd",
+  },
+
+  // ─────────────────────────────────────────
+  //  MEDIA AND VIDEO EDITING
+  // ─────────────────────────────────────────
+  {
+    id: 12,
+    name: "Media Head",           
+    role: "Head, Media & Video Editing",
+    team: "Media and Video Editing",
+    isHead: true,
+    bio: "Leading DATUM's media presence — crafting compelling visual stories and managing brand communications.",
+    skills: ["Video Editing", "Content Writing", "Graphic Design"],
+    photoUrl: "https://ui-avatars.com/api/?name=Media+Head&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+    year: "3rd",
+  },
+  {
+    id: 13,
+    name: "Aarav Srivastava",
+    role: "Co-Head, Media & Video Editing",
+    team: "Media and Video Editing",
+    isHead: true,
+    bio: "B.Tech CSE student at GLA University with a passion for coding, AI, and creative tech. Enjoys building intelligent systems and turning ideas into impactful digital solutions.",
+    skills: ["Web Development", "Frontend Development", "Video Editing", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=1KXbcGszV0v8THxHlyOH1EisJjDeU4Ypo",
+    github: "https://github.com/Aarav-bit",
+    linkedin: "https://www.linkedin.com/in/aarav-srivastava-98b1262",
+    year: "1st",
+  },
+  {
+    id: 14,
+    name: "Yash Singh",
+    role: "Media Team Member",
+    team: "Media and Video Editing",
+    isHead: false,
+    bio: "BTech CSE (AI & ML) student with a passion for video editing and visual storytelling. Always learning and refining the craft.",
+    skills: ["Video Editing"],
+    photoUrl: "https://drive.google.com/uc?id=1Oh7cgGrizzUeXztSqjL05m2ZSfDm4cru",
+    github: "https://github.com/yshthakur01",
+    linkedin: "https://www.linkedin.com/in/yash-singh-b45681383",
+    year: "1st",
+  },
+
+  // ─────────────────────────────────────────
+  //  DESIGN TEAM
+  // ─────────────────────────────────────────
+  {
+    id: 15,
+    name: "Design Head",       
+    role: "Head, Design Team",
+    team: "Design Team",
+    isHead: true,
+    bio: "Steering DATUM's visual identity — from brand guidelines to stunning UI/UX experiences that delight users.",
+    skills: ["UI/UX Design", "Graphic Design", "Branding"],
+    photoUrl: "https://ui-avatars.com/api/?name=Design+Head&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+    year: "3rd",
+  },
+  {
+    id: 16,
+    name: "Vanshika Agrawal",
+    role: "Co-Head, Design Team",
+    team: "Design Team",
+    isHead: true,
+    bio: "Design Co-Head at DATUM GLA. Passionate about frontend development and bringing beautiful, intelligent interfaces to life.",
+    skills: ["Frontend Development", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=178GKBkayVM8Ysfme2E6PZPE7-m8E89V4",
+    github: "https://github.com/vanshii2441",
+    linkedin: "https://www.linkedin.com/in/vanshika-agrawal-8b8a64",
+    year: "2nd",
+  },
+  {
+    id: 17,
+    name: "Nancy Gupta",
+    role: "Design Team Member",
+    team: "Design Team",
+    isHead: false,
+    bio: "1st year CSE (AIML) student with a keen interest in frontend development. Has hands-on experience with HTML, CSS, JavaScript, and Python, and has built projects combining all three.",
+    skills: ["Frontend Development", "UI/UX Design", "Graphic Design", "AI / Machine Learning"],
+    photoUrl: "https://drive.google.com/uc?id=1ssEeSHLRgAkLtQkJXkmvsqxE0tWmrVYf",
+    github: "https://github.com/Nancy-ux07",
+    linkedin: "https://www.linkedin.com/in/nancy-gupta-56834737a",
+    year: "1st",
+  },
+
+  // ─────────────────────────────────────────
+  //  PR TEAM  (DACC)
+  // ─────────────────────────────────────────
+  {
+    id: 18,
+    name: "PR Head",             
+    role: "Head, PR Team",
+    team: "PR Team",
+    isHead: true,
+    bio: "Leading DATUM's public relations and alumni corporate connect — bridging the gap between students and industry.",
+    skills: ["Public Speaking", "Leadership", "Networking"],
+    photoUrl: "https://ui-avatars.com/api/?name=PR+Head&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+    year: "3rd",
+  },
+  {
+    id: 19,
+    name: "Shresth Soni",
+    role: "Co-Head, PR Team (DACC)",
+    team: "PR Team",
+    isHead: true,
+    bio: "2nd-year B.Tech CS student passionate about technology, AI, and building impactful projects. Loves turning ideas into real-world solutions and levelling up his skills.",
+    skills: ["Backend Development", "Frontend Development", "UI/UX Design", "Public Speaking"],
+    photoUrl: "https://drive.google.com/uc?id=1GPpefEo06fngK7rIIf8LloLMRBILCuUK",
+    github: "https://github.com/shresth-soni",
+    linkedin: "https://in.linkedin.com/in/shresth-soni-965910326",
+    year: "2nd",
+  },
+  {
+    id: 20,
+    name: "PR Member",           
+    role: "PR Team Member",
+    team: "PR Team",
+    isHead: false,
+    bio: "Enthusiastic team player contributing to DATUM's outreach and corporate connect initiatives.",
+    skills: ["Content Writing", "Public Speaking", "Networking"],
+    photoUrl: "https://ui-avatars.com/api/?name=PR+Member&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+    year: "1st",
+  },
+];
 /* ================= ACHIEVEMENTS ================= */
 
 export const ACHIEVEMENTS: Achievement[] = [
