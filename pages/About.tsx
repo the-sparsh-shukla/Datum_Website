@@ -32,7 +32,8 @@ const About: React.FC = () => {
       <NeuralBackground />
       <GlowCursor />
 
-      <div className="bg-slate-950 text-white overflow-hidden">
+      {/* ✅ FIXED ROOT */}
+      <div className="bg-white text-black dark:bg-slate-950 dark:text-white overflow-hidden">
 
         {/* ================= HERO ================= */}
 
@@ -49,7 +50,7 @@ const About: React.FC = () => {
               About DATUM
             </h1>
 
-            <p className="mt-6 max-w-2xl mx-auto text-slate-300 text-lg">
+            <p className="mt-6 max-w-2xl mx-auto text-slate-600 dark:text-slate-300 text-lg">
               The official Data Analytics & Data Science society of
               GLA University, empowering students to build the future with data.
             </p>
@@ -63,7 +64,7 @@ const About: React.FC = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-4xl font-bold mb-10 text-indigo-400"
+            className="text-4xl font-bold mb-10 text-indigo-500"
           >
             Who We Are
           </motion.h2>
@@ -72,7 +73,7 @@ const About: React.FC = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-slate-300 text-lg leading-relaxed max-w-4xl mx-auto"
+            className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed max-w-4xl mx-auto"
           >
             DATUM is the technical wing of the Computer Society ABACUS
             under the Department of Computer Engineering & Applications at
@@ -83,13 +84,12 @@ const About: React.FC = () => {
 
         {/* ================= OBJECTIVES ================= */}
 
-        <section className="py-28 bg-slate-900 px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-indigo-400">
+        <section className="py-28 bg-slate-100 dark:bg-slate-900 px-6">
+          <h2 className="text-4xl font-bold text-center mb-16 text-indigo-500">
             Our Objectives
           </h2>
 
           <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
             {[
               {
                 title: "Career Awareness",
@@ -110,31 +110,29 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white/5 backdrop-blur-lg border border-white/10
+                className="bg-white dark:bg-white/5 backdrop-blur-lg border border-gray-200 dark:border-white/10
                 p-10 rounded-2xl shadow-xl"
               >
-                <h3 className="text-xl font-bold mb-4 text-indigo-400">
+                <h3 className="text-xl font-bold mb-4 text-indigo-500">
                   {item.title}
                 </h3>
 
-                <p className="text-slate-400 leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
             ))}
-
           </div>
         </section>
 
         {/* ================= CORE DOMAINS ================= */}
 
         <section className="py-28 px-6 max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-16 text-indigo-400">
+          <h2 className="text-4xl font-bold mb-16 text-indigo-500">
             Core Domains
           </h2>
 
           <div className="grid md:grid-cols-4 gap-8">
-
             {[
               "Data Mining",
               "Data Wrangling",
@@ -147,27 +145,25 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white/5 backdrop-blur-lg border border-white/10
+                className="bg-white dark:bg-white/5 backdrop-blur-lg border border-gray-200 dark:border-white/10
                 p-8 rounded-xl"
               >
-                <p className="text-lg font-semibold text-slate-200">
+                <p className="text-lg font-semibold text-slate-700 dark:text-slate-200">
                   {domain}
                 </p>
               </motion.div>
             ))}
-
           </div>
         </section>
 
         {/* ================= TIMELINE ================= */}
 
         <section className="py-28 px-6 max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-indigo-400">
+          <h2 className="text-4xl font-bold text-center mb-16 text-indigo-500">
             Our Journey
           </h2>
 
           <div className="space-y-20 border-l border-indigo-500/30 pl-10">
-
             {[
               {
                 year: "2017",
@@ -195,7 +191,7 @@ const About: React.FC = () => {
               >
                 <div className="absolute -left-12 top-2 w-5 h-5 bg-indigo-500 rounded-full shadow-lg shadow-indigo-500/40" />
 
-                <h3 className="text-2xl font-bold text-indigo-400">
+                <h3 className="text-2xl font-bold text-indigo-500">
                   {item.year}
                 </h3>
 
@@ -203,27 +199,26 @@ const About: React.FC = () => {
                   {item.title}
                 </h4>
 
-                <p className="text-slate-400 leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                   {item.text}
                 </p>
               </motion.div>
             ))}
-
           </div>
         </section>
 
         {/* ================= CTA ================= */}
 
-        <section className="py-28 text-center bg-slate-900">
+        <section className="py-28 text-center bg-slate-100 dark:bg-slate-900">
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
             Join The Data Revolution
           </h2>
 
-          <p className="text-slate-400 mb-8">
+          <p className="text-slate-600 dark:text-slate-400 mb-8">
             Be a part of DATUM and build the future of data-driven innovation.
           </p>
 
-          <button className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition">
+          <button className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold transition text-white">
             Become a Member
           </button>
         </section>
