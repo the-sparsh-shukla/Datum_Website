@@ -1,8 +1,64 @@
 import React, { useState } from "react";
 import { Linkedin, Github, Users } from "lucide-react";
-import { TEAM_MEMBERS, TEAMS } from "../constants";
+import { TEAM_MEMBERS, TEAMS, LEADERS } from "../constants";
 import Reveal from "../components/Reveal";
 
+/* ─────────────────────────────────────────
+   Floating dots — static data outside component
+   so it never re-randomizes on re-render
+───────────────────────────────────────── */
+const DOT_DATA = [
+  { id:0,  w:8,  l:"4%",  t:"8%",  dur:"12s", del:"0s",   x:40,  y:30  },
+  { id:1,  w:4,  l:"12%", t:"22%", dur:"9s",  del:"1.2s", x:-25, y:45  },
+  { id:2,  w:6,  l:"23%", t:"60%", dur:"14s", del:"0.5s", x:35,  y:-40 },
+  { id:3,  w:3,  l:"35%", t:"15%", dur:"10s", del:"2s",   x:-30, y:20  },
+  { id:4,  w:9,  l:"48%", t:"75%", dur:"16s", del:"0s",   x:20,  y:-50 },
+  { id:5,  w:4,  l:"58%", t:"35%", dur:"11s", del:"3s",   x:-40, y:35  },
+  { id:6,  w:6,  l:"70%", t:"55%", dur:"13s", del:"1s",   x:30,  y:40  },
+  { id:7,  w:3,  l:"82%", t:"20%", dur:"8s",  del:"2.5s", x:-20, y:-30 },
+  { id:8,  w:7,  l:"90%", t:"80%", dur:"15s", del:"0.8s", x:25,  y:-25 },
+  { id:9,  w:4,  l:"6%",  t:"45%", dur:"10s", del:"1.5s", x:50,  y:20  },
+  { id:10, w:5,  l:"18%", t:"85%", dur:"12s", del:"3.5s", x:-35, y:-45 },
+  { id:11, w:3,  l:"30%", t:"40%", dur:"9s",  del:"0.3s", x:20,  y:55  },
+  { id:12, w:8,  l:"42%", t:"10%", dur:"17s", del:"2.2s", x:-45, y:30  },
+  { id:13, w:4,  l:"55%", t:"90%", dur:"11s", del:"1s",   x:30,  y:-35 },
+  { id:14, w:6,  l:"65%", t:"25%", dur:"13s", del:"4s",   x:-25, y:45  },
+  { id:15, w:3,  l:"75%", t:"70%", dur:"10s", del:"0.7s", x:40,  y:-20 },
+  { id:16, w:9,  l:"88%", t:"45%", dur:"14s", del:"2s",   x:-30, y:35  },
+  { id:17, w:4,  l:"50%", t:"50%", dur:"8s",  del:"1.8s", x:25,  y:25  },
+  { id:18, w:5,  l:"95%", t:"15%", dur:"11s", del:"3s",   x:-20, y:-40 },
+  { id:19, w:3,  l:"2%",  t:"70%", dur:"9s",  del:"0.4s", x:45,  y:30  },
+  { id:20, w:7,  l:"38%", t:"95%", dur:"15s", del:"1.3s", x:-40, y:-30 },
+  { id:21, w:4,  l:"62%", t:"5%",  dur:"12s", del:"2.8s", x:30,  y:50  },
+  { id:22, w:5,  l:"78%", t:"88%", dur:"10s", del:"0.6s", x:-35, y:20  },
+  { id:23, w:3,  l:"15%", t:"50%", dur:"13s", del:"3.2s", x:20,  y:-45 },
+  { id:24, w:6,  l:"45%", t:"30%", dur:"9s",  del:"1.7s", x:-25, y:35  },
+];
+
+const FloatingDots: React.FC = () => (
+  <div style={{ position:"absolute", inset:0, overflow:"hidden", pointerEvents:"none", zIndex:0 }}>
+    {DOT_DATA.map((d) => (
+      <div key={d.id} style={{
+        position: "absolute",
+        width: d.w,
+        height: d.w,
+        left: d.l,
+        top: d.t,
+        borderRadius: "50%",
+        background: "#818cf8",
+        opacity: d.w >= 8 ? 0.55 : d.w >= 6 ? 0.4 : d.w >= 4 ? 0.28 : 0.18,
+        animation: `dot${d.id} ${d.dur} ${d.del} ease-in-out infinite alternate`,
+      }} />
+    ))}
+    <style>{DOT_DATA.map((d) =>
+      `@keyframes dot${d.id}{0%{transform:translate(0,0)}100%{transform:translate(${d.x}px,${d.y}px)}}`
+    ).join("")}</style>
+  </div>
+);
+
+/* ─────────────────────────────────────────
+   Main component — hero & cards unchanged
+───────────────────────────────────────── */
 const Team: React.FC = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
@@ -13,7 +69,7 @@ const Team: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
 
-      {/* ── Hero header ── */}
+      {/* ── Hero header — ORIGINAL, UNTOUCHED ── */}
       <Reveal>
         <section className="py-24 text-center border-b border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-4">
@@ -38,82 +94,140 @@ const Team: React.FC = () => {
         </section>
       </Reveal>
 
-      {/* ── Teams sections ── */}
-      {TEAMS.map((teamName) => {
-        const heads = TEAM_MEMBERS.filter(
-          (m) => m.team === teamName && m.isHead
-        );
-        const members = TEAM_MEMBERS.filter(
-          (m) => m.team === teamName && !m.isHead
-        );
+      {/* ── Everything below hero wrapped in relative div for dots ── */}
+      <div className="relative">
+        <FloatingDots />
 
-        return (
-          <Reveal key={teamName}>
-            <section className="py-20 odd:bg-white even:bg-slate-50 dark:odd:bg-slate-950 dark:even:bg-slate-900">
-              <div className="max-w-7xl mx-auto px-4">
+        {/* ── Leadership ── */}
+        <Reveal>
+          <section className="relative py-20 bg-slate-50 dark:bg-slate-900" style={{ zIndex: 1 }}>
+            <div className="max-w-7xl mx-auto px-4">
 
-                {/* ── Team heading ── */}
-                <div className="text-center mb-14">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                    {teamName}
-                  </h2>
-                  <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-indigo-500" />
-                </div>
-
-                {/* ── Heads / Co-Heads ── */}
-                {heads.length > 0 && (
-                  <>
-                    <p className="text-center text-xs font-bold uppercase tracking-widest text-indigo-500 mb-6">
-                      Head &amp; Co‑Head
-                    </p>
-                    <div
-                      className={`flex flex-wrap justify-center gap-8 mb-12 ${
-                        heads.length === 1 ? "max-w-xs mx-auto" : ""
-                      }`}
-                    >
-                      {heads.map((member) => (
-                        <MemberCard
-                          key={member.id}
-                          member={member}
-                          active={activeCard === member.id}
-                          onToggle={toggleCard}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-
-                {/* ── Members ── */}
-                {members.length > 0 && (
-                  <>
-                    <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">
-                      Members
-                    </p>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                      {members.map((member) => (
-                        <MemberCard
-                          key={member.id}
-                          member={member}
-                          active={activeCard === member.id}
-                          onToggle={toggleCard}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-
+              <div className="text-center mb-14">
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                  Leadership
+                </h2>
+                <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-indigo-500" />
               </div>
-            </section>
-          </Reveal>
-        );
-      })}
+
+              <div className="flex flex-wrap justify-center gap-8">
+                {LEADERS.map((leader) => (
+                  <div
+                    key={leader.id}
+                    className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg p-6 
+                    flex flex-col items-center text-center w-full max-w-[260px]"
+                  >
+                    <img
+                      src={leader.photoUrl}
+                      alt={leader.name}
+                      className="w-28 h-28 rounded-xl object-cover shadow mb-4"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src =
+                          `https://ui-avatars.com/api/?name=${encodeURIComponent(leader.name)}&background=6366f1&color=fff&size=200`;
+                      }}
+                    />
+                    <h3 className="font-bold text-lg text-slate-900 dark:text-white">
+                      {leader.name}
+                    </h3>
+                    <p className="text-indigo-600 dark:text-indigo-400 text-sm mb-2">
+                      {leader.role}
+                    </p>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-3">
+                      {leader.bio}
+                    </p>
+                    <div className="flex justify-center gap-4 mt-4">
+                      <a href={leader.linkedin} target="_blank" rel="noreferrer" className="hover:scale-110 transition text-slate-400 hover:text-indigo-500">
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a href={leader.github} target="_blank" rel="noreferrer" className="hover:scale-110 transition text-slate-400 hover:text-indigo-500">
+                        <Github className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ── Teams sections ── */}
+        {TEAMS.map((teamName) => {
+          const heads = TEAM_MEMBERS.filter(
+            (m) => m.team === teamName && m.isHead
+          );
+          const members = TEAM_MEMBERS.filter(
+            (m) => m.team === teamName && !m.isHead
+          );
+
+          return (
+            <Reveal key={teamName}>
+              <section className="relative py-20 odd:bg-white even:bg-slate-50 dark:odd:bg-slate-950 dark:even:bg-slate-900" style={{ zIndex: 1 }}>
+                <div className="max-w-7xl mx-auto px-4">
+
+                  {/* ── Team heading ── */}
+                  <div className="text-center mb-14">
+                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                      {teamName}
+                    </h2>
+                    <div className="mt-3 mx-auto w-16 h-1 rounded-full bg-indigo-500" />
+                  </div>
+
+                  {/* ── Heads / Co-Heads ── */}
+                  {heads.length > 0 && (
+                    <>
+                      <p className="text-center text-xs font-bold uppercase tracking-widest text-indigo-500 mb-6">
+                        Head &amp; Co‑Head
+                      </p>
+                      <div
+                        className={`flex flex-wrap justify-center gap-8 mb-12 ${
+                          heads.length === 1 ? "max-w-xs mx-auto" : ""
+                        }`}
+                      >
+                        {heads.map((member) => (
+                          <MemberCard
+                            key={member.id}
+                            member={member}
+                            active={activeCard === member.id}
+                            onToggle={toggleCard}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+
+                  {/* ── Members ── */}
+                  {members.length > 0 && (
+                    <>
+                      <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">
+                        Members
+                      </p>
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {members.map((member) => (
+                          <MemberCard
+                            key={member.id}
+                            member={member}
+                            active={activeCard === member.id}
+                            onToggle={toggleCard}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+
+                </div>
+              </section>
+            </Reveal>
+          );
+        })}
+      </div>
 
     </div>
   );
 };
 
 /* ─────────────────────────────────────────
-   Extracted MemberCard component
+   MemberCard — ORIGINAL, UNTOUCHED
 ───────────────────────────────────────── */
 type MemberCardProps = {
   member: (typeof TEAM_MEMBERS)[number];
@@ -138,6 +252,10 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, active, onToggle }) => 
           src={member.photoUrl}
           alt={member.name}
           className="w-28 h-28 rounded-xl object-cover shadow mb-4"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src =
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=6366f1&color=fff&size=200`;
+          }}
         />
 
         <h3 className="font-bold text-lg text-slate-900 dark:text-white">

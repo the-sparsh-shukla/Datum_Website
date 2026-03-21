@@ -8,14 +8,13 @@ import {
 
 /* ================= TEAM INTERFACE ================= */
 
-// constants.ts — DATUM Team Members grouped by team
 
 export type TeamMember = {
   id: number;
   name: string;
   role: string;
   team: string;
-  isHead: boolean; // true = Head / Co-Head
+  isHead: boolean; 
   bio: string;
   skills: string[];
   photoUrl: string;
@@ -32,6 +31,50 @@ export const TEAMS = [
   "PR Team",
 ] as const;
 
+export type Leader = {
+  id: number;
+  name: string;
+  role: string;
+  bio: string;
+  skills: string[];
+  photoUrl: string;
+  github: string;
+  linkedin: string;
+};
+ 
+export const LEADERS: Leader[] = [
+  {
+    id: 101,
+    name: "President",
+    role: "President",
+    bio: "Leading DATUM with vision and purpose — driving innovation, fostering collaboration, and building a community where every member thrives.",
+    skills: ["Leadership", "Strategy", "Public Speaking", "Community Building"],
+    photoUrl: "https://ui-avatars.com/api/?name=President&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+  },
+  {
+    id: 102,
+    name: "Vice President",
+    role: "Vice President",
+    bio: "Supporting the club's vision and operations — bridging teams, enabling execution, and ensuring DATUM continues to grow and inspire.",
+    skills: ["Leadership", "Operations", "Team Management", "Networking"],
+    photoUrl: "https://ui-avatars.com/api/?name=Vice+President&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+  },
+  {
+    id: 103,
+    name: "General Manager",
+    role: "General Manager",
+    bio: "Overseeing all teams and club activities — keeping things organised, efficient, and aligned with DATUM's mission.",
+    skills: ["Management", "Planning", "Communication", "Problem Solving"],
+    photoUrl: "https://ui-avatars.com/api/?name=General+Manager&background=6366f1&color=fff&size=200",
+    github: "#",
+    linkedin: "#",
+  },
+];
+
 export const TEAM_MEMBERS: TeamMember[] = [
   // ─────────────────────────────────────────
   //  TECH TEAM
@@ -39,28 +82,28 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 1,
     name: "Harsh Chaudhary",
-    role: "Co-Head, Tech Team",
+    role: "Head, Tech Team",
     team: "Tech Team",
     isHead: true,
     bio: "AIML student and full-stack developer passionate about building scalable web applications and intelligent systems. Always exploring backend architecture, AI solutions, and impactful tech innovation.",
     skills: ["Web Development", "Backend Development", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=1ETFuZ8x-lPbU502AcrsquCtu_2SwURaw",
+    photoUrl: "/team/harsh-chaudhary.jpeg",
     github: "https://github.com/HARSHCHAUDHARY04",
-    linkedin: "https://www.linkedin.com/in/harsh-chaudhary-0aa420",
+    linkedin: "https://www.linkedin.com/in/harsh-chaudhary-0aa420316/",
     year: "2nd",
   },
   {
     id: 2,
-    name: "Tech Head",            
-    role: "Head, Tech Team",
+    name: "Priya Shukla",            
+    role: "Co-Head, Tech Team",
     team: "Tech Team",
     isHead: true,
-    bio: "Leading the Tech Team at DATUM — building innovative solutions and mentoring the next generation of developers.",
-    skills: ["Web Development", "Leadership", "System Design"],
-    photoUrl: "https://ui-avatars.com/api/?name=Tech+Head&background=6366f1&color=fff&size=200",
-    github: "#",
-    linkedin: "#",
-    year: "3rd",
+    bio: "Tech-driven learner focused on building scalable web applications using Python, Flask, and MySQL. Strong in logic building, backend development, and turning ideas into clean, functional solutions.",
+    skills: ["Web Development", "Backend Development", "UI/UX Design", "AI / Machine Learning"],
+    photoUrl: "/team/priya-shukla.jpg",
+    github: "https://github.com/PriyaShukla3694",
+    linkedin: "https://www.linkedin.com/in/priya-shukla-37b79333a",
+    year: "2nd",
   },
   {
     id: 3,
@@ -70,9 +113,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "Frontend developer and UI/UX enthusiast who loves turning static design mockups into fully responsive, interactive sites that look great and work smoothly.",
     skills: ["Frontend Development", "UI/UX Design"],
-    photoUrl: "https://drive.google.com/uc?id=1GMXLhrS3kLF-60HVmEZ-DUY1au1vJou3",
+    photoUrl: "/team/krishna-upadhyay.jpg",
     github: "https://github.com/k98-lang",
-    linkedin: "https://www.linkedin.com/in/krishna-upadhyay-829113",
+    linkedin: "https://www.linkedin.com/in/krishna-upadhyay-829113384?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     year: "1st",
   },
   {
@@ -83,22 +126,22 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "Aspiring full-stack developer with a passion for AI-powered solutions. Driven by learning, innovation, and making technology meaningful.",
     skills: ["Web Development", "Backend Development", "Frontend Development"],
-    photoUrl: "https://drive.google.com/uc?id=1MD3Ze8hZyyOlUKHzVkfMzFDDTuNxZp7O",
+    photoUrl: "/team/kritika-kanchan.jpg",
     github: "https://github.com/Kritika-Kanchan-dev",
     linkedin: "https://www.linkedin.com/in/kritika-kanchan",
     year: "2nd",
   },
   {
     id: 5,
-    name: "Priya Shukla",
+    name: "Tech Member",
     role: "Tech Team Member",
     team: "Tech Team",
     isHead: false,
     bio: "Tech-driven learner focused on building scalable web applications using Python, Flask, and MySQL. Strong in logic building, backend development, and turning ideas into clean, functional solutions.",
     skills: ["Web Development", "Backend Development", "UI/UX Design", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=1kohQoXjI9ahctPsVU7bWRGXtjtGf8OPC",
-    github: "https://github.com/PriyaShukla3694",
-    linkedin: "https://www.linkedin.com/in/priya-shukla-37b79333a",
+    photoUrl: "https://lh3.googleusercontent.com/d/1kohQoXjI9ahctPsVU7bWRGXtjtGf8OPC",
+    github: "#",
+    linkedin: "#",
     year: "2nd",
   },
 
@@ -113,7 +156,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: true,
     bio: "Event Team Co-Head at DATUM. Skilled in web development, video editing, and content writing — bringing creativity and energy to every event.",
     skills: ["Web Development", "Video Editing", "Content Writing"],
-    photoUrl: "https://drive.google.com/uc?id=128hIvcJpTfEJ6MpES0FE00zPwBYF5Skx",
+    photoUrl: "/team/keshav-jha.jpg",
     github: "https://github.com/keshav979",
     linkedin: "https://www.linkedin.com/in/keshav-jha-8203a234b",
     year: "2nd",
@@ -126,7 +169,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: true,
     bio: "Enthusiastic AI student with a strong interest in public speaking and web development. Believes in teamwork, leadership, and continuous learning.",
     skills: ["Frontend Development", "Public Speaking", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=10c3yQIayoI0FxCMFydoJ5x2pZbXK1R4B",
+    photoUrl: "/team/kritika-saxena.png",
     github: "https://github.com/kritika-26",
     linkedin: "https://www.linkedin.com/in/kritika-saxena-509335335",
     year: "2nd",
@@ -139,7 +182,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "Building the web. Solving with logic. Growing every day. Full-Stack Developer focused on clean architecture and problem solving.",
     skills: ["Web Development", "Backend Development", "Frontend Development", "Content Writing"],
-    photoUrl: "https://drive.google.com/uc?id=1hFeXg3sXN6FVS-uGCSksJCOEmeuOHObW",
+    photoUrl: "/team/ronit-goswami.jpeg",
     github: "https://github.com/ronit-a11y",
     linkedin: "https://www.linkedin.com/in/ronit-goswami-ba764432",
     year: "2nd",
@@ -152,7 +195,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "Driven CS (AI & ML) student passionate about building impactful, real-world tech solutions. Focused on data, innovation, and continuous growth.",
     skills: ["Frontend Development", "UI/UX Design", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=16wpEz1yzMdU1lj_2DYDdnijfErgKFv0h",
+    photoUrl: "/team/pradyumn-rana.jpeg",
     github: "https://github.com/pradyumn2304",
     linkedin: "https://www.linkedin.com/in/pradyumn-rana-81b886383",
     year: "1st",
@@ -165,7 +208,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "BCA (Data Science) student passionate about technology and innovation. Focused on developing strong analytical and problem-solving skills.",
     skills: ["Frontend Development", "Graphic Design"],
-    photoUrl: "https://drive.google.com/uc?id=1ctRfwAi-Z0iEmqdmm0tsmc9p5cFP2kg6",
+    photoUrl: "/team/suhani-saxena.jpeg",
     github: "https://github.com/saxenasuhani1709-ks",
     linkedin: "https://www.linkedin.com/in/suhani-saxena-291086384",
     year: "1st",
@@ -178,7 +221,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "Building my path, one smart move at a time. Dream big. Work smart. Stay real.",
     skills: ["Backend Development", "Frontend Development", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=1lkdksBdwln_KW2lZxW3YWSkikmz55CvU",
+    photoUrl: "/team/mradul-khandelwal.jpg",
     github: "https://github.com/MK-2822/",
     linkedin: "https://www.linkedin.com/in/mradul-khandelwal05/",
     year: "2nd",
@@ -208,7 +251,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: true,
     bio: "B.Tech CSE student at GLA University with a passion for coding, AI, and creative tech. Enjoys building intelligent systems and turning ideas into impactful digital solutions.",
     skills: ["Web Development", "Frontend Development", "Video Editing", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=1KXbcGszV0v8THxHlyOH1EisJjDeU4Ypo",
+    photoUrl: "team/Aarav-srivastava.HEIC",
     github: "https://github.com/Aarav-bit",
     linkedin: "https://www.linkedin.com/in/aarav-srivastava-98b1262",
     year: "1st",
@@ -221,7 +264,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "BTech CSE (AI & ML) student with a passion for video editing and visual storytelling. Always learning and refining the craft.",
     skills: ["Video Editing"],
-    photoUrl: "https://drive.google.com/uc?id=1Oh7cgGrizzUeXztSqjL05m2ZSfDm4cru",
+    photoUrl: "team/yash-singh.jpg",
     github: "https://github.com/yshthakur01",
     linkedin: "https://www.linkedin.com/in/yash-singh-b45681383",
     year: "1st",
@@ -251,7 +294,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: true,
     bio: "Design Co-Head at DATUM GLA. Passionate about frontend development and bringing beautiful, intelligent interfaces to life.",
     skills: ["Frontend Development", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=178GKBkayVM8Ysfme2E6PZPE7-m8E89V4",
+    photoUrl: "team/vanshika-agrawal.jpg",
     github: "https://github.com/vanshii2441",
     linkedin: "https://www.linkedin.com/in/vanshika-agrawal-8b8a64",
     year: "2nd",
@@ -264,7 +307,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: false,
     bio: "1st year CSE (AIML) student with a keen interest in frontend development. Has hands-on experience with HTML, CSS, JavaScript, and Python, and has built projects combining all three.",
     skills: ["Frontend Development", "UI/UX Design", "Graphic Design", "AI / Machine Learning"],
-    photoUrl: "https://drive.google.com/uc?id=1ssEeSHLRgAkLtQkJXkmvsqxE0tWmrVYf",
+    photoUrl: "https://ui-avatars.com/api/?name=PR+Head&background=6366f1&color=fff&size=200",
     github: "https://github.com/Nancy-ux07",
     linkedin: "https://www.linkedin.com/in/nancy-gupta-56834737a",
     year: "1st",
@@ -294,7 +337,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     isHead: true,
     bio: "2nd-year B.Tech CS student passionate about technology, AI, and building impactful projects. Loves turning ideas into real-world solutions and levelling up his skills.",
     skills: ["Backend Development", "Frontend Development", "UI/UX Design", "Public Speaking"],
-    photoUrl: "https://drive.google.com/uc?id=1GPpefEo06fngK7rIIf8LloLMRBILCuUK",
+    photoUrl: "team/shresth-soni.jpg",
     github: "https://github.com/shresth-soni",
     linkedin: "https://in.linkedin.com/in/shresth-soni-965910326",
     year: "2nd",
