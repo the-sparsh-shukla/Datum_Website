@@ -40,6 +40,22 @@ const AddEvent: React.FC = () => {
     isFeatured: false
   });
 
+  const uploadToCloudinary = async (file: File) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'datum_events');
+
+  const res = await fetch(
+    'https://api.cloudinary.com/v1_1/dxcxabqyw/image/upload',
+    {
+      method: 'POST',
+      body: formData
+    }
+  );
+
+  const data = await res.json();
+  return data.secure_url;
+};
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -55,28 +71,58 @@ const AddEvent: React.FC = () => {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result as string);
-        setEventData(prev => ({ ...prev, imageUrl: reader.result as string }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+
+  if (!file) return;
+
+  // ✅ Validation
+  if (!file.type.startsWith('image/')) {
+    alert('Please upload a valid image file');
+    return;
+  }
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Image size should be less than 5MB');
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const imageUrl = await uploadToCloudinary(file);
+
+    // ✅ Save image everywhere properly
+    setUploadedImage(imageUrl);
+    setEventData(prev => ({
+      ...prev,
+      imageUrl: imageUrl
+    }));
+
+  } catch (error) {
+    console.error("Upload failed", error);
+    alert("Image upload failed ❌");
+  }
+
+  setIsSubmitting(false);
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    if (!eventData.imageUrl) {
+  alert("Please upload an event image 📸");
+  setIsSubmitting(false);
+  return;
+}
     
     const newEventData: Omit<Event, 'id'> = {
       title: eventData.title,
       date: `${eventData.date} • ${eventData.time}`,
       category: eventData.category as Event['category'],
       description: eventData.description,
-      imageUrl: eventData.imageUrl || 'https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?q=80&w=800'
+      imageUrl: eventData.imageUrl
     };
 
     try {
