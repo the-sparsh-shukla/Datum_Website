@@ -8,8 +8,13 @@ const NeuralBackground = () => {
     const ctx = canvas.getContext("2d")!;
     let animationFrameId: number;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
 
     const particles = Array.from({ length: 80 }).map(() => ({
       x: Math.random() * canvas.width,
@@ -19,7 +24,15 @@ const NeuralBackground = () => {
     }));
 
     const draw = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // ✅ Dynamic colors based on theme
+      const particleColor = isDark ? "#6366f1" : "#4f46e5";
+      const lineColor = isDark
+        ? "rgba(99,102,241,0.1)"
+        : "rgba(79,70,229,0.15)";
 
       particles.forEach((p, i) => {
         p.x += p.vx;
@@ -30,7 +43,7 @@ const NeuralBackground = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#6366f1";
+        ctx.fillStyle = particleColor;
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -39,7 +52,7 @@ const NeuralBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 120) {
-            ctx.strokeStyle = "rgba(99,102,241,0.1)";
+            ctx.strokeStyle = lineColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -54,7 +67,10 @@ const NeuralBackground = () => {
 
     draw();
 
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   return (

@@ -433,7 +433,7 @@ export const PAST_EVENTS: Event[]  = [
     title:"W3M AI Meetup",
     category:"Networking",
     date:"Sept 15, 2025",
-    imageUrl:"https://images.unsplash.com/photo-1556761175-4b46a572b786",
+    imageUrl:"\W3M_AI_Meetup.jpeg",
     description:"AI tools, Web3 discussions, internship insights and project mentorship."
   },
 
@@ -469,7 +469,7 @@ export const PAST_EVENTS: Event[]  = [
     title:"GenAI + IoT Workshop",
     category:"Workshop",
     date:"Oct 19, 2024",
-    imageUrl:"https://images.unsplash.com/photo-1555255707-c07966088b7b",
+    imageUrl:"\GenAI+IOT.jpeg",
     description:"Hands-on workshop integrating Generative AI with IoT systems."
   },
 
@@ -478,7 +478,7 @@ export const PAST_EVENTS: Event[]  = [
     title:"Project-X Face Recognition Workshop",
     category:"Workshop",
     date:"Apr 21, 2023",
-    imageUrl:"https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+    imageUrl:"\PROJECTX.jpeg",
     description:"Students built a real-time face recognition system using machine learning."
   },
 
@@ -487,7 +487,7 @@ export const PAST_EVENTS: Event[]  = [
     title:"CNN Deep Learning Workshop",
     category:"Workshop",
     date:"Feb 26, 2022",
-    imageUrl:"https://images.unsplash.com/photo-1518770660439-4636190af475",
+    imageUrl:"\CNNWorkshop.jpeg",
     description:"Workshop focused on Convolutional Neural Networks and computer vision."
   }
 

@@ -291,11 +291,7 @@ const Events: React.FC = () => {
                     style={{ animationDelay: `${i * 0.1}s` }}
                   >
                     <div className="relative w-full sm:w-2/5 h-52 sm:h-auto overflow-hidden flex-shrink-0">
-                      <img
-                        src={event.imageUrl}
-                        alt={event.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
+                      <img src={event.imageUrl || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}alt={event.title}onError={(e) => {(e.currentTarget as HTMLImageElement).src ="https://images.unsplash.com/photo-1551288049-bebda4e38f71";}}className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
                       <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-black/40 to-transparent" />
                       <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${tagColors[event.category] || tagColors.Workshop}`}>
                         {event.category}
@@ -390,7 +386,7 @@ const Events: React.FC = () => {
                 >
                   {/* Image with overlay */}
                   <div className="past-card-img relative h-48 overflow-hidden">
-                    <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={event.imageUrl || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"} alt={event.title}onError={(e) => {(e.currentTarget as HTMLImageElement).src ="https://images.unsplash.com/photo-1551288049-bebda4e38f71";}}className="w-full h-full object-cover"/>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${tagColors[event.category] || tagColors.Workshop}`}>
                       {event.category}
@@ -575,7 +571,7 @@ const Events: React.FC = () => {
             >
               {selectedEvent.imageUrl && (
                 <div className="relative h-52 overflow-hidden">
-                  <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-full object-cover" />
+                  <img src={selectedEvent.imageUrl || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}alt={selectedEvent.title}onError={(e) => {(e.currentTarget as HTMLImageElement).src ="https://images.unsplash.com/photo-1551288049-bebda4e38f71";}}className="w-full h-full object-cover"/>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   <button
                     onClick={closeModal}

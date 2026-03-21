@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import MagneticButton from "../components/MagneticButton";
 
@@ -83,6 +83,7 @@ const ParticleNetwork = () => {
 
 const Hero: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -102,85 +103,73 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center -mt-16 overflow-hidden bg-white dark:bg-slate-950 px-6"
-    >
-      <ParticleNetwork />
-      <div className="max-w-7xl mt-12 mx-auto grid md:grid-cols-2 items-center gap-16 w-full">
+    <>
+      <section
+        onMouseMove={handleMouseMove}
+        className="relative min-h-screen flex items-center -mt-16 overflow-hidden bg-white dark:bg-slate-950 px-6"
+      >
+        <ParticleNetwork />
 
-        {/* LEFT SIDE */}
-        <div className="space-y-8 text-left">
+        <div className="max-w-7xl mt-12 mx-auto grid md:grid-cols-2 items-center gap-16 w-full">
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl md:text-7xl font-black leading-[1.05]"
-          >
-            <span className="block text-slate-900 dark:text-white">
-              Exploring the Science
-            </span>
+          {/* LEFT */}
+          <div className="space-y-8 text-left">
 
-            {/* Animated Gradient Text */}
-            <span className="block bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-400 bg-[length:200%_200%] animate-gradient bg-clip-text text-transparent">
-              behind Data and AI
-            </span>
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl md:text-7xl font-black leading-[1.05]"
+            >
+              <span className="block text-slate-900 dark:text-white">
+                Exploring the Science
+              </span>
 
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed">
-            DATUM is where visionary students design AI systems,
-            explore deep data science, and build technology that shapes tomorrow.
-          </p>
+              <span className="block bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-400 bg-[length:200%_200%] animate-gradient bg-clip-text text-transparent">
+                behind Data and AI
+              </span>
+            </motion.h1>
 
-          <MagneticButton>
-            <button className="px-10 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg shadow-lg shadow-indigo-600/30 transition-all duration-300">
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl">
+              DATUM is where visionary students design AI systems,
+              explore deep data science, and build technology that shapes tomorrow.
+            </p>
+
+            <MagneticButton onClick={() => setOpen(true)}>
               Join Community
-            </button>
-          </MagneticButton>
-        </div>
+            </MagneticButton>
 
-        {/* RIGHT SIDE BOT */}
-        <div
-          ref={ref}
-          className="relative flex justify-center items-center perspective-1000"
-        >
+          </div>
 
-          {/* Glow following cursor */}
-          <motion.div
-            style={{
-              x,
-              y
-            }}
-            className="absolute w-[350px] h-[350px] bg-indigo-600/30 rounded-full blur-[120px]"
-          />
+          {/* RIGHT */}
+          <div
+            ref={ref}
+            className="relative flex justify-center items-center perspective-1000"
+          >
+            <motion.div
+              style={{ x, y }}
+              className="absolute w-[350px] h-[350px] bg-indigo-600/30 rounded-full blur-[120px]"
+            />
 
-          {/* Rotating Light Beam */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="absolute w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 rounded-full blur-[140px]"
-          />
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+              className="absolute w-[500px] h-[500px] bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 rounded-full blur-[140px]"
+            />
 
-          {/* 3D Floating Bot */}
-          <motion.img
-            src="/botcircle.png"
-            alt="AI Bot"
-            style={{
-              rotateX,
-              rotateY
-            }}
-            animate={{ y: [0, -15, 0] }}
-            transition={{
-              y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="relative w-80 md:w-[420px] drop-shadow-[0_0_60px_rgba(99,102,241,0.6)]"
-          />
+            <motion.img
+              src="/botcircle.png"
+              alt="AI Bot"
+              style={{ rotateX, rotateY }}
+              animate={{ y: [0, -15, 0] }}
+              transition={{ y: { duration: 5, repeat: Infinity } }}
+              className="relative w-80 md:w-[420px]"
+            />
+          </div>
 
         </div>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
